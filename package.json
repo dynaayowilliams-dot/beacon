@@ -1,0 +1,18 @@
+{
+  "name": "beacon",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.18.3",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "tsc --noEmit && pnpm -r typecheck",
+    "test": "pnpm --filter @beacon/core test",
+    "dev": "pnpm --filter @beacon/web dev",
+    "proof:read": "tsx scripts/connection-proof.ts",
+    "proof:wallet": "tsx scripts/connection-proof.ts --wallet",
+    "proof:write": "tsx scripts/connection-proof.ts --write"
+  },
+  "devDependencies": { "@types/node": "^24.0.0", "tsx": "^4.20.0", "typescript": "~5.9.3" },
+  "dependencies": { "@arkiv-network/sdk": "~0.8.0", "viem": "^2.38.0", "@beacon/core": "workspace:*" }
+}

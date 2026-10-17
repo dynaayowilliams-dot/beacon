@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.pnpm-store/
+.local/
+*.log
+*.tsbuildinfo
+build/
+coverage/
+# Wallet exports and local signing material must never be published.
+*.pem
+*.key
+*.keystore
+keystore/
+keystores/
+wallet.json
+wallets/
+secrets/
+secrets.*
+*mnemonic*
+*private-key*
+*private_key*
+*seed-phrase*
