@@ -1,6 +1,6 @@
-﻿# Beacon
+﻿# Bearkiv
 
-A tamper-evident public notice board on Arkiv Tiramisu. Use only synthetic notices and fictional publishers. A valid wallet signature proves control of a wallet, not an organization's identity or the truth of a notice.
+Bearkiv is an independent project built on Arkiv: a tamper-evident public notice board on Tiramisu. Use only synthetic notices and fictional publishers. A valid wallet signature proves control of a wallet, not an organization's identity or the truth of a notice.
 
 ## Run locally (Windows PowerShell)
 
@@ -96,7 +96,7 @@ Core tests compile TypeScript and run JavaScript using Node's test runner, avoid
 - Approve both requests once. Wait for `Published and verified`, note the explorer link, actual Entity Expiration block and entity key, and find the notice in the refreshed feed (or Load more).
 - Open the local tampering simulation on that notice. Change the body: see Invalid wallet signature. Reset: see Valid wallet signature. No wallet prompt should appear and the original notice must stay unchanged.
 - Test keyboard navigation and a narrow browser window. Use a separate test-only account; do not put any real personal data in notices.
-- Visit `/`, follow Open Beacon to `/app`, and try the demo without connecting a wallet. If RPC is offline, confirm the demo explicitly labels its local example NOT on Arkiv; the board must still show a connection error.
+- Visit `/`, follow Open Bearkiv to `/app`, and try the demo without connecting a wallet. If RPC is offline, confirm the demo explicitly labels its local example NOT on Arkiv; the board must still show a connection error.
 - Copy a real notice link. Open it in a new tab and refresh. It must load that exact entity. Try a malformed key, an unavailable RPC and a genuinely absent/expired key; check the honest status messages.
 - On a notice signed by your connected test wallet, issue one synthetic revocation. Approve both requests, wait for confirmation/readback, and confirm Revoked by publisher appears while Valid wallet signature remains separate. The original entity key/content must remain unchanged. Connect another wallet: the revoke action must not appear. These live revocation steps have not been performed by the agent.
 - Disable RPC access and recheck revocation: status must be unknown, never active. On the deployed origin directly refresh `/app`, `/demo`, and a known `/notice/<entity-key>` link to check the Vercel rewrites.
@@ -123,7 +123,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Staging failed. Stop here.' }
 git -c safe.directory=C:/Users/HP/Documents/beacon diff --cached --stat
 git -c safe.directory=C:/Users/HP/Documents/beacon diff --cached --check
 if ($LASTEXITCODE -ne 0) { throw 'Staged diff check failed.' }
-git -c safe.directory=C:/Users/HP/Documents/beacon commit -m "Prepare Beacon public app for Vercel deployment"
+git -c safe.directory=C:/Users/HP/Documents/beacon commit -m "Prepare Bearkiv public app for Vercel deployment"
 if ($LASTEXITCODE -ne 0) { throw 'Commit failed. Stop here.' }
 git -c safe.directory=C:/Users/HP/Documents/beacon push origin main
 if ($LASTEXITCODE -ne 0) { throw 'Push failed. Do not force-push.' }
@@ -134,7 +134,7 @@ if (($beaconRemoteRef -split '\s+')[0] -ne $beaconLocalCommit) { throw 'Local an
 Write-Output "Verified pushed commit: $beaconLocalCommit"
 ```
 
-`.env`, `.local/`, `.vercel/`, node_modules, built output, generated tests and common wallet exports are ignored. The only .env-style file intended for Git is the empty .env.example template. Never force-add ignored files. These instructions affect Beacon only.
+`.env`, `.local/`, `.vercel/`, node_modules, built output, generated tests and common wallet exports are ignored. The only .env-style file intended for Git is the empty .env.example template. Never force-add ignored files. These instructions affect Bearkiv only.
 
 Then use the Vercel website (no CLI installation needed):
 
@@ -194,3 +194,5 @@ For further diagnostics, open the failed Vercel deployment, select Build Logs an
 The Vercel install for 3bd4610 installed only root dependencies (21 packages), leaving React, its types and Vite unavailable to apps/web. The previous --workspace-root install flag selected only the root project. Installation now explicitly uses --recursive and --prod=false to install all three projects including build-time dependencies. Keep --workspace-root for the build script, where selecting the root is intentional. The deployment runner also checks web dependency resolution before typechecking and explains incomplete installation. No checks are skipped.
 
 The corrected install was validated with pinned pnpm 10.18.3 in a fresh local Git clone with no node_modules or generated output, using an offline package cache. It installed all three workspaces, and React, React DOM, both type packages and Vite resolved from apps/web. This is local Windows validation; a successful hosted deployment is still required.
+
+Branding compatibility: the visible product is Bearkiv. Existing repository/deployment URLs, `@beacon/*` packages, `beacon.synthetic.v1` query namespace and Beacon signature domains remain unchanged for existing notices. The rename does not modify stored entities.

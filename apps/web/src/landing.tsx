@@ -5,7 +5,7 @@ export function Landing() {
     <section className="landing-intro" aria-labelledby="landing-title"><div className="landing-copy"><span className="section-kicker">PUBLIC NOTICES, WITH A SIGNATURE</span>
       <h1 id="landing-title">A clear signal.<br /><em>A verifiable source.</em></h1>
       <p className="landing-description">Publish signed public notices. Verify the publishing wallet. Spot altered messages.</p>
-      <div className="landing-actions"><a className="primary-link" href="/app">Open Beacon ↗</a><a className="secondary-link" href="/demo">Try the tampering demo</a></div>
+      <div className="landing-actions"><a className="primary-link" href="/app">Open Bearkiv ↗</a><a className="secondary-link" href="/demo">Try the tampering demo</a></div>
       <p className="small-muted">Read and try the demo without connecting a wallet.</p></div>
       <article className="illustrative-notice"><div className="section-kicker">ILLUSTRATIVE EXAMPLE</div><div className="card-top"><span className="severity">Info</span><span className="topic">Community</span></div>
         <h2>A small update.<br />A source you can check.</h2><p>The fictional Lavender House reading room opens at 10 tomorrow. This notice is an example, not a live Arkiv record.</p>
@@ -23,9 +23,9 @@ export function Landing() {
       <article><span className="use-icon" aria-hidden="true">◷</span><h3>Event updates</h3><p>Share a schedule change with signed content and a link readers can verify for themselves.</p></article>
       <article><span className="use-icon" aria-hidden="true">✓</span><h3>Security advisories</h3><p>Help readers detect altered advisory text without treating a signature as proof that the advice is true.</p></article>
     </div></section>
-    <section className="landing-grid trust-grid"><article><div className="section-kicker">STORED ON ARKIV</div><h2>Public, queryable,<br />and time-scoped.</h2><p>Beacon uses Arkiv, the Web3 database, to store public notices and query their attributes. Anyone can read without a Beacon backend or a connected wallet.</p><p>Every entity has explicit <strong>Entity Expiration</strong>. Notices may expire or be deleted. Storage and revocation records are not permanent.</p></article>
+    <section className="landing-grid trust-grid"><article><div className="section-kicker">STORED ON ARKIV</div><h2>Public, queryable,<br />and time-scoped.</h2><p>Bearkiv is an independent project built on Arkiv, the Web3 database. It uses Arkiv to store public notices and query their attributes. Anyone can read without a Bearkiv backend or a connected wallet.</p><p>Every entity has explicit <strong>Entity Expiration</strong>. Notices may expire or be deleted. Storage and revocation records are not permanent.</p></article>
       <article className="trust-explanation"><span className="section-kicker">WHAT TRUST MEANS HERE</span><h2>A signature has<br />a specific meaning.</h2><p>A valid signature proves control of a wallet. It does not prove the truth of a notice or an organization's identity.</p><p>Check the publishing wallet, immutable creator and signature result. Then make your own decision about the source.</p><a className="text-button" href="/demo">See why changing a message matters →</a></article></section>
-    <section className="landing-cta"><div><span className="section-kicker">YOUR NEXT CLEAR SIGNAL</span><h2>Open the board. Check the source.</h2></div><a className="primary-link" href="/app">Open Beacon ↗</a></section>
+    <section className="landing-cta"><div><span className="section-kicker">YOUR NEXT CLEAR SIGNAL</span><h2>Open the board. Check the source.</h2></div><a className="primary-link" href="/app">Open Bearkiv ↗</a></section>
     <SiteFooter />
   </main></>;
 }
