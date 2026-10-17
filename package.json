@@ -6,6 +6,7 @@
   "engines": { "node": ">=22.12.0" },
   "scripts": {
     "build": "pnpm -r build",
+    "build:vercel": "node scripts/build-vercel.mjs",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
     "test": "pnpm --filter @beacon/core test",
     "dev": "pnpm --filter @beacon/web dev",

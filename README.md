@@ -150,8 +150,8 @@ Then use the Vercel website (no CLI installation needed):
 | Root Directory | Repository root (`./`), not apps/web |
 | Framework Preset | Vite |
 | Node.js Version | 24.x |
-| Install Command | `corepack pnpm install --frozen-lockfile` |
-| Build Command | `corepack pnpm typecheck && corepack pnpm test && corepack pnpm build && corepack pnpm check:bundle` |
+| Install Command | `corepack pnpm --workspace-root install --frozen-lockfile` |
+| Build Command | `corepack pnpm --workspace-root run build:vercel` |
 | Output Directory | `apps/web/dist` |
 | Production Branch | main |
 | Build-tool variable | `ENABLE_EXPERIMENTAL_COREPACK=1` |
@@ -182,3 +182,10 @@ This local app is not yet a full hackathon submission. A public deployment, <=3 
 
 ### Finding the revoke action
 Open `/app`, then **Open notice** on your own signed notice (`/notice/<entity-key>`). Select Rabby in the wallet panel and connect the original publishing account on Tiramisu. An already-authorized account is restored silently on page load. The prominent **Revoke notice** button appears beneath the signature/revocation status when the verified publisher matches your account (case-insensitive). Unavailable actions explain why; pending checks, wrong network, and transactions in progress disable submission. A verified existing revocation prevents another submission. Revocation signatures are still independently checked on publication and readback.
+
+### Vercel workspace build failure and diagnosis
+The deployment log for `0760d3e` started `@beacon/web typecheck` directly, not the root `beacon typecheck` script. Web typechecking does not require generated core output: core exports TypeScript source. The next command, `pnpm test`, has no corresponding script in apps/web. pnpm can fall through to the system `test` command; with no arguments it exits silently with code 1 under Git Bash, reproducing the supplied failure pattern. Running the original chain from the workspace root passed.
+
+The Vercel install/build commands now explicitly select `--workspace-root`. `build:vercel` streams each check, labels its start/result, uses explicit `run` to prevent missing-script command fallback, and sets the subprocess working directory to the root. All checks remain enabled. Root Directory must still be repository root (`.`); output paths are relative to that directory. The committed vercel.json overrides dashboard install/build/output values, so use the matching table above. The existing /app, /demo and /notice/:path* rewrites remain intact.
+
+For further diagnostics, open the failed Vercel deployment, select Build Logs and expand the complete log. The runner prints `[Beacon deployment] Starting <step>` and a failure code with inherited tool output. Copy from the workspace-root banner through the failed step. Redeploy with the build cache disabled if investigating a stale install. Never include environment values or upload .env. No public deployment success is established by local checks.
