@@ -1,0 +1,13 @@
+{
+  "evidenceSource": "Verified script output supplied by the builder; agent session could not independently reach RPC",
+  "chainId": 7738577,
+  "creator": "0x98Ee00009c448c0D83aFE306E4cE29f6B8Fdb77a",
+  "entityKey": "0x68f15efc9bb3d659fd21a67f338bf7dde1ed97b60d65fb943c7c4edeeb067cd2",
+  "txHash": "0xed7dc8e52998bc9821ad7755b55f0fc2df588492c9bec59ffe9a457ba10afc8f",
+  "noticeId": "a51ba19c-fef2-4a65-9db7-55eb29be8812",
+  "query": "project = str('beacon.synthetic.v1') AND type = str('notice') AND notice_id = str('a51ba19c-fef2-4a65-9db7-55eb29be8812') AND $creator = addr(0x98Ee00009c448c0D83aFE306E4cE29f6B8Fdb77a)",
+  "expirationHours": 168,
+  "verified": true,
+  "expiresAtBlock": "998427",
+  "verifiedAtBlock": "696028"
+}

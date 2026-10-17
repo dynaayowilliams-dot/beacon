@@ -1,10 +1,12 @@
 node_modules/
 dist/
+dist-tests/
 .env
 .env.*
 !.env.example
 .pnpm-store/
 .local/
+.vercel/
 *.log
 *.tsbuildinfo
 build/

@@ -1,6 +1,25 @@
 {
-  "name": "@beacon/core", "version": "0.0.0", "private": true, "type": "module",
-  "exports": { ".": "./src/index.ts" },
-  "scripts": { "build": "tsc", "typecheck": "tsc --noEmit", "test": "tsx --test src/*.test.ts" },
-  "dependencies": { "viem": "^2.38.0" }
+  "name": "@beacon/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./arkiv": "./src/arkiv.ts",
+    "./sharing": "./src/sharing.ts",
+    "./demo": "./src/demo.ts",
+    "./revocations": "./src/revocations.ts",
+    "./revocation-arkiv": "./src/revocation-arkiv.ts",
+    "./wallet-session": "./src/wallet-session.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test dist-tests/*.test.js"
+  },
+  "dependencies": {
+    "viem": "^2.38.0",
+    "@arkiv-network/sdk": "~0.8.0",
+    "@noble/curves": "1.9.1"
+  }
 }

@@ -1,4 +1,5 @@
 import { verifyMessage, type Address, type Hex } from 'viem';
+export * from './notices.js';
 
 export const CHAIN_ID = 7738577;
 export const RPC_URL = 'https://rpc.tiramisu.db-chain.testnet.arkiv.network';

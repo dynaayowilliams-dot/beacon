@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
     "test": "pnpm --filter @beacon/core test",
     "dev": "pnpm --filter @beacon/web dev",
+    "check:bundle": "node scripts/check-browser-bundle.mjs",
     "proof:read": "tsx scripts/connection-proof.ts",
     "proof:wallet": "tsx scripts/connection-proof.ts --wallet",
     "proof:write": "tsx scripts/connection-proof.ts --write"

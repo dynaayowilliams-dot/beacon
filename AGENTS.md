@@ -10,7 +10,7 @@ Sources reviewed 2026-10-17. Work in this folder. Explain user actions with exac
 
 ## Scope and security
 Beacon is a tamper-evident public notice board using Arkiv, the Web3 database. Only synthetic notices and fictional publishers. A signature proves wallet control, never organizational identity. Proposed track: Security, pending builder confirmation. Readers harmed by forged notices are the intended users.
-Current scope: TypeScript/pnpm core and Vite/React web scaffold, plus connection proof. No CLI package, full interface, or OpenAI integration.
+Current scope: TypeScript/pnpm core, connection proof, landing page, public board at /app, shareable notice links, browser-wallet publishing, signature verification, local tampering demo and separate signed revocation entities. No backend, CLI package, encryption, co-signing or OpenAI integration. Frontend publishing uses browser-wallet approvals only. Preserve legacy v1 proof signatures; use the fully signed v2 schema for new browser notices. Revocation must independently verify the original publisher signature, exact target key and original notice digest; failed lookup means unknown status, not active. Both notices and revocations have explicit Entity Expiration.
 Never request, log, commit, or store secrets or real personal data (including hashes) in Arkiv. A root ignored .env may configure the Node-only wallet script locally; keys must never enter frontend code or VITE_ variables. Do not inspect or print secret file contents or environment values. Report sanitized errors only.
 
 ## Arkiv contract
