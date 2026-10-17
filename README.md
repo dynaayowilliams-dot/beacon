@@ -5,7 +5,7 @@ Tamper-evident synthetic public notices on Arkiv, the Web3 database. A fictional
 This is setup only: `packages/core` contains signing-message and verification helpers; `apps/web` is a Vite/React placeholder; `scripts/connection-proof.ts` is a Node-only write/query proof. No CLI package or OpenAI integration.
 
 ## Current status
-Canonical hackathon AGENTS.md, RULES.md, rubric and checklist were read before changes. SDK 0.8.1 is now installed and inspected. Workspace typecheck and build passed. Builder reported successful Tiramisu read (count 0). Agent-session tests and reads via tsx hit a local uv_os_get_passwd ENOMEM startup error. No live write or on-chain evidence yet. See [friction](arkiv/friction.md).
+Canonical hackathon AGENTS.md, RULES.md, rubric and checklist were read before changes. SDK 0.8.1 is installed and inspected. Workspace typecheck and build passed. Builder ran the write proof successfully in normal PowerShell: transaction confirmation, attribute query, creator and payload checks, signature verification and tamper rejection passed. Public output is preserved in [connection evidence](arkiv/connection-proof.json), verified at block 693750 with Entity Expiration at block 996149 (requested lifetime 168 hours). The agent session could not independently reach RPC; separate core tests remain blocked here by tsx startup ENOMEM. See [friction](arkiv/friction.md).
 
 ## Install and check (Windows PowerShell)
 Use Node >=22.12. In normal PowerShell with internet access:
