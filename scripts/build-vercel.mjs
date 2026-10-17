@@ -1,9 +1,18 @@
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 
 // Build tooling only: no environment files or wallet settings are read.
 const root = fileURLToPath(new URL('../', import.meta.url));
 console.log(`[Beacon deployment] Workspace root: ${root}`);
+const webRequire = createRequire(new URL('../apps/web/package.json', import.meta.url));
+for (const dependency of ['react/jsx-runtime', 'react-dom/client', '@types/react/package.json', '@types/react-dom/package.json', 'vite/package.json']) {
+  try { webRequire.resolve(dependency); }
+  catch {
+    console.error(`[Beacon deployment] Missing web dependency: ${dependency}. Install ALL workspaces with: corepack pnpm --recursive install --frozen-lockfile --prod=false`);
+    process.exit(1);
+  }
+}
 for (const step of ['typecheck', 'test', 'build', 'check:bundle']) {
   console.log(`\n[Beacon deployment] Starting ${step}`);
   // Explicit "run" prevents a missing script from falling through to an OS command.

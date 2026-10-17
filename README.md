@@ -150,7 +150,7 @@ Then use the Vercel website (no CLI installation needed):
 | Root Directory | Repository root (`./`), not apps/web |
 | Framework Preset | Vite |
 | Node.js Version | 24.x |
-| Install Command | `corepack pnpm --workspace-root install --frozen-lockfile` |
+| Install Command | `corepack pnpm --recursive install --frozen-lockfile --prod=false` |
 | Build Command | `corepack pnpm --workspace-root run build:vercel` |
 | Output Directory | `apps/web/dist` |
 | Production Branch | main |
@@ -186,6 +186,11 @@ Open `/app`, then **Open notice** on your own signed notice (`/notice/<entity-ke
 ### Vercel workspace build failure and diagnosis
 The deployment log for `0760d3e` started `@beacon/web typecheck` directly, not the root `beacon typecheck` script. Web typechecking does not require generated core output: core exports TypeScript source. The next command, `pnpm test`, has no corresponding script in apps/web. pnpm can fall through to the system `test` command; with no arguments it exits silently with code 1 under Git Bash, reproducing the supplied failure pattern. Running the original chain from the workspace root passed.
 
-The Vercel install/build commands now explicitly select `--workspace-root`. `build:vercel` streams each check, labels its start/result, uses explicit `run` to prevent missing-script command fallback, and sets the subprocess working directory to the root. All checks remain enabled. Root Directory must still be repository root (`.`); output paths are relative to that directory. The committed vercel.json overrides dashboard install/build/output values, so use the matching table above. The existing /app, /demo and /notice/:path* rewrites remain intact.
+The Vercel install command explicitly selects all workspace projects with `--recursive`; the build command selects the root script with `--workspace-root`. `build:vercel` streams each check, labels its start/result, uses explicit `run` to prevent missing-script command fallback, and sets the subprocess working directory to the root. All checks remain enabled. Root Directory must still be repository root (`.`); output paths are relative to that directory. The committed vercel.json overrides dashboard install/build/output values, so use the matching table above. The existing /app, /demo and /notice/:path* rewrites remain intact.
 
 For further diagnostics, open the failed Vercel deployment, select Build Logs and expand the complete log. The runner prints `[Beacon deployment] Starting <step>` and a failure code with inherited tool output. Copy from the workspace-root banner through the failed step. Redeploy with the build cache disabled if investigating a stale install. Never include environment values or upload .env. No public deployment success is established by local checks.
+
+### Workspace installation correction
+The Vercel install for 3bd4610 installed only root dependencies (21 packages), leaving React, its types and Vite unavailable to apps/web. The previous --workspace-root install flag selected only the root project. Installation now explicitly uses --recursive and --prod=false to install all three projects including build-time dependencies. Keep --workspace-root for the build script, where selecting the root is intentional. The deployment runner also checks web dependency resolution before typechecking and explains incomplete installation. No checks are skipped.
+
+The corrected install was validated with pinned pnpm 10.18.3 in a fresh local Git clone with no node_modules or generated output, using an offline package cache. It installed all three workspaces, and React, React DOM, both type packages and Vite resolved from apps/web. This is local Windows validation; a successful hosted deployment is still required.
